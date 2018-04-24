@@ -1,0 +1,318 @@
+swagger: "2.0"
+info:
+  title: XiYouLinux CS Recruit API
+  description: Recruitment platform API of XiYouLinux CS.
+  version: 1.0.0
+  contact:
+    email: yanglongfei@xiyoulinux.org
+basePath: /recruit
+paths:
+  /comments/{Id}:
+    get:
+      tags:
+      - post_comment
+      description: get  recruit detail
+      operationId: ReCommentController.GetRecruitComment
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitMsg for comment
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitComment'
+        "400":
+          description: get recruit detail error
+    post:
+      tags:
+      - post_comment
+      description: add  comment
+      operationId: ReCommentController.InsertRecruitComment
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitMsg for comment
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitComment'
+        "400":
+          description: get recruit detail error
+  /commit_recruit_news/:
+    get:
+      tags:
+      - detail
+      description: get all recruit list
+      operationId: RecruitController.GetRecruitList
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruitmsg error
+    post:
+      tags:
+      - detail
+      description: commit a recruit msg
+      operationId: RecruitController.CommitRecruitMsg
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: commit recruitmsg error
+  /commit_recruit_news/{Id}:
+    get:
+      tags:
+      - detail
+      description: get  recruit detail
+      operationId: RecruitController.GetRecruitList
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitmsg
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruit detail error
+  /detail/:
+    get:
+      tags:
+      - detail
+      description: get all recruit list
+      operationId: RecruitController.GetRecruitList
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruitmsg error
+    post:
+      tags:
+      - detail
+      description: commit a recruit msg
+      operationId: RecruitController.CommitRecruitMsg
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: commit recruitmsg error
+  /detail/{Id}:
+    get:
+      tags:
+      - detail
+      description: get  recruit detail
+      operationId: RecruitController.GetRecruitList
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitmsg
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruit detail error
+  /get_recruit_msg/:
+    get:
+      tags:
+      - detail
+      description: get all recruit list
+      operationId: RecruitController.GetRecruitList
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruitmsg error
+    post:
+      tags:
+      - detail
+      description: commit a recruit msg
+      operationId: RecruitController.CommitRecruitMsg
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: commit recruitmsg error
+  /get_recruit_msg/{Id}:
+    get:
+      tags:
+      - detail
+      description: get  recruit detail
+      operationId: RecruitController.GetRecruitList
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitmsg
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitMsg'
+        "400":
+          description: get recruit detail error
+  /newslist/:
+    get:
+      tags:
+      - newslist
+      description: get all news list
+      operationId: NewsController.Getlist
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.News'
+        "400":
+          description: get newlist error
+  /post_comment/{Id}:
+    get:
+      tags:
+      - post_comment
+      description: get  recruit detail
+      operationId: ReCommentController.GetRecruitComment
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitMsg for comment
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitComment'
+        "400":
+          description: get recruit detail error
+    post:
+      tags:
+      - post_comment
+      description: add  comment
+      operationId: ReCommentController.InsertRecruitComment
+      parameters:
+      - in: path
+        name: key
+        description: the id for recruitMsg for comment
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.RecruitComment'
+        "400":
+          description: get recruit detail error
+definitions:
+  models.News:
+    title: News
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      News_time:
+        type: string
+        format: string
+      News_title:
+        type: string
+      News_url:
+        type: string
+      Person_id:
+        type: integer
+        format: int64
+      Person_name:
+        type: string
+  models.RecruitComment:
+    title: RecruitComment
+    type: object
+    properties:
+      Comment_content:
+        type: string
+      Comment_created:
+        type: string
+        format: string
+      Comment_modified:
+        type: string
+        format: string
+      Comment_parent:
+        type: integer
+        format: int64
+      Id:
+        type: integer
+        format: int64
+      Person_id:
+        type: integer
+        format: int64
+      Person_name:
+        type: string
+      RecruitMsg:
+        $ref: '#/definitions/models.RecruitMsg'
+      Release_head_url:
+        type: string
+      UpvoteCount:
+        type: integer
+        format: int64
+      UserHasUpvoted:
+        type: string
+  models.RecruitMsg:
+    title: RecruitMsg
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Person_id:
+        type: integer
+        format: int64
+      Person_name:
+        type: string
+      Recruit_company:
+        type: string
+      Recruit_content:
+        type: string
+      Recruit_endtime:
+        type: string
+        format: string
+      Recruit_releasetime:
+        type: string
+        format: string
+      Recruit_title:
+        type: string
+      RecruitComment:
+        type: array
+        items:
+          $ref: '#/definitions/models.RecruitComment'
+tags:
+- name: get_recruit_msg
+  description: |
+    Operations about RecruitMsg
+- name: commit_recruit_news
+  description: |
+    Operations about RecruitMsg
+- name: detail
+  description: |
+    Operations about RecruitMsg

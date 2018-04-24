@@ -1,0 +1,113 @@
+create database recruit;
+
+drop table IF EXISTS  News_table;
+# 最新动态轮播表结构
+create table News_table(
+  id int  NOT NULL AUTO_INCREMENT,                   #主键
+  person_id  int,           #发布人ID
+  person_name varchar(20),  #发布人姓名
+  news_title  varchar(100), #动态标题
+  news_time   datetime,     #动态时间
+  new_url     varchar(200),   #轮播点击访问统一接口
+  PRIMARY KEY (id)
+);
+#招聘日历表结构
+drop table IF EXISTS Kalendar;
+create table Kalendar(
+  id int NOT NULL AUTO_INCREMENT,                       #主键                                                            #主键
+  person_id int,                #发布人ID
+  person_name varchar(30),      #发布人
+  event_title varchar(50),      #事件标题
+  event_starttime  datetime,    #事件开始时间
+  event_endtime    datetime,    #事件结束时间
+  event_allday     tinyint,     #是否是全天事件
+  event_bgcolor    varchar(10), #事件背景颜色(用于事件分类)
+  is_avaliable     tinyint,     #是否被删除
+  PRIMARY KEY (id)
+
+);
+#面试交流表结构
+drop table IF EXISTS Interview;
+create table Interview(
+  id  int  NOT NULL AUTO_INCREMENT,                           #主键
+  person_id int,                     #发布人ID
+  person_name varchar(30),           #发布人
+  interview_title    varchar(150),   #面试经历标题
+  interview_company  varchar(100),   #面试公司
+  interview_time     datetime,       #面试时间
+  interview_way      varchar(100),   #面试方式
+  interview_class    varchar(100),   #面试形式
+  interview_content  longtext,       #面试内容整理
+  PRIMARY KEY (id)
+);
+#招聘动态表结构(RecruitMsg)
+drop table IF EXISTS RecruitMsg;
+create table RecruitMsg(
+  id int  NOT NULL AUTO_INCREMENT,                           #主键
+  person_id int,                    #发布人ID
+  person_name varchar(30),          #发布人
+  recruit_title  varchar(100),      #招聘动态标题
+  recruit_company varchar(30),      #招聘企业
+  recruit_releasetime  datetime,    #信息发布时间
+  recruit_endtime      datetime,    #信息有效日期
+  recruit_content      longtext,    #招聘动态内容
+  PRIMARY KEY (id)
+);
+#简历信息表结构
+drop table IF EXISTS ResumeMsg;
+create table ResumeMsg(
+  id  int  NOT NULL AUTO_INCREMENT,                         #主键
+  person_id int,                   #简历发布者ID
+  person_name varchar(20),         #简历发布人
+  resume_name  varchar(100),       #简历文件名
+  resume_desc  varchar(100),       #简历描述
+  resume_path  varchar(100),       #简历存放路径
+  resume_thumb varchar(100),       #简历缩略图存放位置
+  upload_time  datetime,           #上传时间
+  is_gathered  tinyint,            #是否可被收集
+  resume_tags  longtext,           #简历标签
+  PRIMARY KEY (id)
+
+);
+#招聘信息评论系统表结构(RecruitComment 表)
+drop table IF EXISTS RecruitComment;
+create table RecruitComment(
+  id int NOT NULL AUTO_INCREMENT,                          #主键
+  recruit_id  int,                 #外键,关联到招聘动态
+  person_id int,                   #发布者ID
+  person_name varchar(20),         #发布人
+  releaseHeadURL  varchar(100),    #发布者头像地址
+  comment_parent  int,             #评论父节点
+  comment_created  datetime,       #评论创建时间
+  comment_modified datetime,       #评论修改时间
+  comment_content  longtext,       #评论具体内容
+  upvoteCount      int,            #点赞数
+  userHasUpvoted   longtext,       #赞过的人
+  PRIMARY KEY (id),
+  FOREIGN KEY(recruit_id) REFERENCES RecruitMsg(id)
+);
+#面试经历评论系统表结构(InterviewComment 表)
+drop table IF EXISTS InterviewComment;
+create table InterviewComment(
+  id int NOT NULL AUTO_INCREMENT,                          #主键
+  Interview_id  int,               #外键,关联到招聘动态
+  person_id int,                   #发布者ID
+  person_name varchar(20),         #发布人
+  releaseHeadURL  varchar(100),    #发布者头像地址
+  comment_parent  int,             #评论父节点
+  comment_created  datetime,       #评论创建时间
+  comment_modified datetime,       #评论修改时间
+  comment_content  longtext,       #评论具体内容
+  upvoteCount      int,            #点赞数
+  userHasUpvoted   longtext,       #赞过的人
+  PRIMARY KEY (id),
+  FOREIGN KEY (Interview_id) REFERENCES Interview(id)
+);
+#标签系统表结构设计(Tag 表)
+drop table IF EXISTS Tag;
+create table Tag(
+  id int NOT NULL AUTO_INCREMENT,                          #主键
+  tag_name varchar(20),            #标签名
+  tag_to_resume   longtext,        #标签到简历的映射
+  PRIMARY KEY (id)
+);
